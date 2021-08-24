@@ -2,7 +2,7 @@ import datetime
 from datetime import date
 
 from django.shortcuts import render
-from . models import *
+from .models import *
 import json
 from django.db.models import Count
 from django.core.paginator import Paginator
@@ -15,7 +15,7 @@ from django.http import JsonResponse
 def showHistory(request):
     users = CustomUser.objects.all()
     keywords_with_count = History.objects.values("keyword"). \
-                              order_by("keyword").annotate(key_count=Count("keyword")).order_by('-key_count')
+        order_by("keyword").annotate(key_count=Count("keyword")).order_by('-key_count')
     # keywords_count_by_user = History.objects.values("keyword", "custom_user").order_by("keyword", "custom_user").\
     #     annotate(kwy_count=Count("keyword"))
     keywords = History.objects.all()
@@ -29,7 +29,7 @@ def showHistory(request):
             keywords = ""
 
         return render(request, template_name="history.html", context={"keywords": keywords,
-                                                                      "keywords_with_count":keywords_with_count,
+                                                                      "keywords_with_count": keywords_with_count,
                                                                       "users": users})
     elif request.method == "POST":
         data = json.loads(request.body)
@@ -48,15 +48,16 @@ def showHistory(request):
         if keywords != "":
             for keyword in keywords:
                 data.append({"keyword": keyword.keyword,
-                             "search_time": keyword.search_time.strftime('%b %d,%Y, %H:%M %p') if keyword.search_time else None,
+                             "search_time": keyword.search_time.strftime(
+                                 '%b %d,%Y, %H:%M %p') if keyword.search_time else None,
                              "custom_user": keyword.custom_user.username,
-                             "search_result":keyword.search_result})
+                             "search_result": keyword.search_result})
 
             page.update({
-                "has_previous":keywords.has_previous(),
+                "has_previous": keywords.has_previous(),
                 "previous_page_number": keywords.previous_page_number() if keywords.has_previous() else None,
-                "has_next":keywords.has_next(),
-                "next_page_number":keywords.next_page_number() if keywords.has_next() else None,
+                "has_next": keywords.has_next(),
+                "next_page_number": keywords.next_page_number() if keywords.has_next() else None,
                 "number": keywords.number,
             })
             print(page)
@@ -94,18 +95,18 @@ def filterHistory(request):
             print("before timeRange: ", len(histories))
             if "last month" in timeRange:
                 print("month")
-                syear, smonth, sday  = str(timezone.now().date()).split('-')
-                start_date = date(int(syear), int(smonth)-1, int(sday))
+                syear, smonth, sday = str(timezone.now().date()).split('-')
+                start_date = date(int(syear), int(smonth) - 1, int(sday))
                 histories = histories.filter(search_time__gte=start_date)
             elif "last week" in timeRange:
                 print("week")
                 syear, smonth, sday = str(timezone.now().date()).split('-')
-                start_date = date(int(syear), int(smonth), int(sday)-7)
+                start_date = date(int(syear), int(smonth), int(sday) - 7)
                 histories = histories.filter(search_time__gte=start_date)
             elif "yesterday" in timeRange:
                 print("yesterday")
                 syear, smonth, sday = str(timezone.now().date()).split('-')
-                start_date = date(int(syear), int(smonth), int(sday)-1)
+                start_date = date(int(syear), int(smonth), int(sday) - 1)
                 histories = histories.filter(search_time__gte=start_date)
 
             print(len(histories))
@@ -156,5 +157,4 @@ def filterHistory(request):
             print(page)
             print(histories.number)
 
-        return JsonResponse({"data": data, "page":page})
-
+        return JsonResponse({"data": data, "page": page})
