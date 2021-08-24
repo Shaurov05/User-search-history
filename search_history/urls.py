@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('', showHistory, name="index"),
+    path('filter', filterHistory, name="filterHistory"),
 ]
