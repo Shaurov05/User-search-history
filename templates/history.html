@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+    <div class="" style="padding-left: 60px;" >
+
+        <h1>Welcome to User History Page</h1>
+        <h3 style="text-align:justify;"> Search history using different filters.
+        </h3>
+        <br>
+
+        <div class="row ">
+            <div class="col-lg-4 col-md-4 col-sm-4 ">
+                <h4>First 10 keywords</h4>
+                {% for keyword in keywords_with_count %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        {{ keyword.keyword }} ({{ keyword.key_count }} times found)
+                      </label>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 ">
+                <h4> First 10 Users </h4>
+                {% for user in users %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        {{ user.username }}
+                      </label>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 ">
+                <h4> Time Range </h4>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    See data from yesterday
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    See data from last week
+                  </label>
+                </div>
+
+                <div class='form-check'>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    See data from last month
+                  </label>
+                </div>
+
+                <h4 style='margin-top: 10px;'> Date Range </h4>
+                <form >
+                  <label for="startDate">Start Date:</label>
+                  <input type="date" id="startDate" name="startDate">
+                  <br><label for="endDate">End Date:</label>
+                  <input type="date" id="endDate" name="endDate">
+                  <br><input type="submit">
+                </form>
+
+            </div>
+        </div>
+        <br><hr><br>
+
+
+    <div id="history">
+
+    </div>
+
+    </div>
+
+
+<script type="text/javascript">
+
+    {% if keywords %}
+
+        var item = "";
+        item += "<div class='row'>"
+        {% for keyword in keywords %}
+            item += "<div class='card' style='width: 18rem; padding:2px 2px 2px 2px'>";
+            item += "<div class='card-body'>";
+            {#item += "<div class='col-lg-4 col-md-4 col-sm-4'>";#}
+            item += "<h3>" + "{{ keyword.keyword }}" + "</h3>";
+            item += "<h6 class='card-title'> Searched by:" + "{{keyword.custom_user.username}}" + "</h6>"
+            item += "<p class='card-text'>" + "{{ keyword.search_time }}" + "</p>"
+            item += "</div>";
+            {#item += "</div>";#}
+            item += "</div>";
+        {% endfor %}
+        item += "</div>";
+        document.getElementById("history").innerHTML = item;
+
+    {% endif %}
+
+
+</script>
+
+{% endblock %}
+
+
