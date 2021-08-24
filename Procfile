@@ -1,0 +1,1 @@
+web: gunicorn markYourCompany.wsgi --log-file -
