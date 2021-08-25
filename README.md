@@ -17,12 +17,12 @@ pip install -m ./requirements.txt
 ### 3. Create a Mongodb database named "search_history"
 
 
-### 4. Apply the migrations as usual.
+### 4. Apply the migrations as usual (At first, go inside the project directory.  ```cd User-seach-history```).
 ```
 python manage.py makemigations
 python manage.py migrate
 ```
-#### 5. To run application server (At first, go inside the project directory.  ```cd User-seach-history```)
+#### 5. To run application server 
 ```
 python manage.py runserver
 ```
