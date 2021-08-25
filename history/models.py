@@ -1,14 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-
+from accounts.models import *
 
 # Create your models here.
-
-
-class CustomUser(AbstractUser):
-    pass
-
 
 class History(models.Model):
     keyword = models.CharField(max_length=200, blank=False, default='')

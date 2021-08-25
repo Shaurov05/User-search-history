@@ -1,1 +1,31 @@
 # User-search-history
+
+#### Download the code to your PC, unpack the zip and move inside the folder.
+
+#### 1. Create a new Python Virtual Environment:
+```
+python3 -m venv venv
+```
+
+#### 2. Activate the environment and install all the Python/Django dependencies:
+
+```
+source ./venv/bin/activate
+pip install -m ./requirements.txt
+```
+
+### 3. Create a Mongodb database named "search_history"
+
+
+### 4. Apply the migrations as usual.
+```
+python manage.py makemigations
+python manage.py migrate
+```
+#### 4. To populate database, run
+```
+python populate.py
+```
+
+#### 4. Find live version [here](https://search-history.herokuapp.com/)
+

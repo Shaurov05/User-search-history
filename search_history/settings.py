@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'accounts',
     'history',
 ]
 
@@ -135,4 +136,4 @@ STATICFILES_DIRS = [
 ]
 
 # custom user model
-AUTH_USER_MODEL = "history.CustomUser"
+AUTH_USER_MODEL = "accounts.CustomUser"
