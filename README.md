@@ -22,10 +22,14 @@ pip install -m ./requirements.txt
 python manage.py makemigations
 python manage.py migrate
 ```
-#### 4. To populate database, run
+#### 5. To run application server (At first, go inside the project directory.  ```cd User-seach-history```)
+```
+python manage.py runserver
+```
+#### 6. To populate database, run
 ```
 python populate.py
 ```
 
-#### 4. Find live version [here](https://search-history.herokuapp.com/)
+#### 7. Find live version [here](https://search-history.herokuapp.com/)
 
