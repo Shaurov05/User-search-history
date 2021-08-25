@@ -1,1 +1,1 @@
-web: gunicorn markYourCompany.wsgi --log-file -
+web: gunicorn search_history.wsgi --log-file -
